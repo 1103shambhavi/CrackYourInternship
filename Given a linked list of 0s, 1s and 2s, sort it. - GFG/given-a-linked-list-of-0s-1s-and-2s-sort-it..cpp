@@ -31,49 +31,80 @@ struct Node *start = NULL;
 */
 class Solution
 {
+    private:
+    void insert(Node* &tail, Node* data)
+    {
+        tail->next=data;
+        tail=data;
+    }
+    
     public:
     //Function to sort a linked list of 0s, 1s and 2s.
     Node* segregate(Node *head) 
     {
+     
+        //make 3 sub list of 0s,1s,2s
+        Node*zerohead=new Node(-1);
+        Node*zerotail=zerohead;
         
-        int zeroes=0;
-        int ones=0;
-        int twoes=0;
+        Node*onehead=new Node(-1);
+        Node*onetail=onehead;
         
-        Node*temp=head;
+        Node*twohead=new Node(-1);
+        Node*twotail=twohead;
+        
+        Node* temp=head;
+        
         while(temp!=NULL)
         {
             if(temp->data==0)
-                zeroes++;
-                
+            {
+                insert(zerotail,temp);
+            }
             else if(temp->data==1)
-                ones++;
-                
+            {
+                insert(onetail,temp);
+            }
             else
-                twoes++;
-                
-            temp= temp->next;    
+            {
+                insert(twotail,temp);
+            }
+            
+            temp=temp->next;
         }
         
-        temp=head;
-        while(zeroes--)
-       {
-           temp->data=0;
-           temp=temp->next;
-       }
-       while(ones--)
-       {
-           temp->data=1;
-           temp=temp->next;
-       }
-       while(twoes--)
-       {
-           temp->data=2;
-           temp=temp->next;
-       }
+        //Merge all 3 list
+        
+        //Step 1 merge 0 and 1
+        
+        //if 1s is emplty
+        if(onehead->next==NULL)
+        {
+            zerotail->next=twohead->next;
+        }
+        
+        else
+        {
+            zerotail->next=onehead->next;   
+        }
+        
+        //merge 1s and 2s
+        
+        onetail->next=twohead->next;
+        twotail->next=NULL;
+        
+        //setup head;
+        head=zerohead->next;
+        
+        //delete dummy nodes
+        delete zerohead;
+        delete onehead;
+        delete twohead;
         
         return head;
-    }
+        
+        
+    }    
 };
 
 
