@@ -2,24 +2,18 @@ class Solution {
 public:
     int maxProfit(vector<int>& prices) 
     {
-        int n= prices.size();
-        int buy=INT_MAX;
-        int maxprofit=0;
         
-        for(int i=0;i<n;i++)
+        int s = prices.size();
+        int maxprofit = 0;
+        int mini = INT_MAX;
+        
+        for(int i=0;i<s;i++)
         {
-            //finding minimum of all values
-            if(prices[i]<buy)
-            {
-                buy=prices[i];
-            }
+            mini = min(prices[i] , mini);
             
-            //if the p[i] is greater than buy then check if the profit(prices[i]-buy >     maxprofit then update)
-            
-            else if( prices[i]-buy > maxprofit)
-                maxprofit= prices[i]-buy;
+            maxprofit = max(prices[i]-mini , maxprofit);
+                   
         }
-        
         return maxprofit;
         
     }
