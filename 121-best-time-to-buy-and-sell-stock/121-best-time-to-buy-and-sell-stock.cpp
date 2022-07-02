@@ -9,9 +9,13 @@ public:
         
         for(int i=0;i<s;i++)
         {
-            mini = min(prices[i] , mini);
+            if(prices[i]<mini)
+            {
+                mini=prices[i];
+            }
             
-            maxprofit = max(prices[i]-mini , maxprofit);
+            if(prices[i]>mini  &&  prices[i]-mini > maxprofit)
+                maxprofit= prices[i]-mini;
                    
         }
         return maxprofit;
