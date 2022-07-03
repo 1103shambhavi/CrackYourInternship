@@ -3,22 +3,18 @@ public:
     vector<int> twoSum(vector<int>& nums, int target)
     {
         vector<int> ans;
+        unordered_map<int,int> mpp;
         
-        for(int i=0;i<nums.size()-1;i++)
+        for(int i=0;i<nums.size();i++)
         {
-             
-            for(int j=i+1;j<nums.size();j++)
-            {
-                if(target==nums[i]+nums[j])
-                {
-                  ans.push_back(i);
-                  ans.push_back(j);  
-                }
-            }
-           
-        
-        
-    }
+             if(  mpp.find (target-nums[i])  != mpp.end() )
+             {
+                 ans.push_back(mpp[target - nums[i]]);
+                 ans.push_back(i);
+             }
+            
+            mpp[nums[i]]=i;
+        }
         return ans;
     }
         
