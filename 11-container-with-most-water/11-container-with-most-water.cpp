@@ -2,26 +2,26 @@ class Solution {
 public:
     int maxArea(vector<int>& height) 
     {
-        int start=0;
-        int end=height.size()-1;
+        int maxWater=INT_MIN;
+        int waterstored;
         
-        int maxi=0;
+        int s=0;
+        int e=height.size()-1;
         
-        int water_ht;
-        
-        while(start<end)
+        while(s<=e)
         {
-            water_ht=min(height[start],height[end]);
+            waterstored=(e-s)*min(height[s],height[e]);
             
-             maxi= max(maxi , (water_ht *(end-start)));
+            maxWater=max(maxWater, waterstored);
             
-            if(height[start]<height[end])
-                start++;
+            if(height[s]<height[e])
+                s++;
+            
             else
-                end--;
+                e--;
         }
         
-        return maxi;
+        return maxWater;
         
     }
 };
