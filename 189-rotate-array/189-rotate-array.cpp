@@ -4,7 +4,8 @@ public:
     void rotate(vector<int>& nums, int k) 
     {
         int n= nums.size();
-        k%=n;
+        k=k%n;
+        
         reverse(nums.begin(),nums.end());
         
         reverse(nums.begin(),nums.begin()+k);
