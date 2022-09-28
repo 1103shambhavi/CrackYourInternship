@@ -12,17 +12,38 @@
 class Solution {
     
     private:
-    int height(TreeNode* root)
+    pair<bool,int>fastBalanced(TreeNode* root)
     {
+        //base case
         if(root==NULL)
-            return 0;
+        {
+            pair<bool,int>p = make_pair(true,0);
+            return p;
+        }
         
-        int h1= height(root->left);
-        int h2= height(root->right);
+        //call for right and left
+        pair<bool,int> left = fastBalanced(root->left);
+        pair<bool,int> right = fastBalanced(root->right);
         
-        int ans= max(h1,h2)+1;
+        bool op1=left.first;
+        bool op2= right.first;
+        
+        bool htdiff= abs(left.second - right.second) <=1;
+        
+        //make ans pair
+        pair<bool,int>ans;
+        if(op1 && op2 && htdiff)
+            ans.first= true;
+        else
+            ans.first=false;
+        
+        ans.second= max(left.second,right.second)+1;
+        
         return ans;
+        
+        
     }
+    
 public:
     bool isBalanced(TreeNode* root) 
     {
@@ -30,17 +51,11 @@ public:
         if(root==NULL)
             return true;
         
-        //call for left and right part
-        bool left = isBalanced(root->left);
-        bool right = isBalanced(root->right);
+        pair<bool,int> ans=fastBalanced(root);
         
-        bool htdiff= abs(height(root->left) - height(root->right)) <=1;
+        return ans.first;
         
-        if(left && right && htdiff)
-            return true;
         
-        else
-            return false;
         
     }
 };
