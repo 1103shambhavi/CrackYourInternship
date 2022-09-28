@@ -11,18 +11,34 @@
  */
 class Solution {
     private:
-    int height(TreeNode* root)
+    pair<int,int> fastDia(TreeNode* root)
     {
         if(root==NULL)
-            return 0;
+        {
+            pair<int,int>p=make_pair(0,0);
+            return p;
+        }
         
-        //call for left
-        int h1= height(root->left);
-        int h2= height(root->right);
+        //call for left tree
+        pair<int,int>left=fastDia(root->left);
         
-        int ans=max(h1,h2)+1;
+        //call for right
+        pair<int,int>right=fastDia(root->right);
+        
+        //extracting options
+        int op1=left.first;
+        int op2=right.first;
+        
+        int op3= left.second + right.second;
+        
+        //make ans;
+        pair<int,int>ans;
+        
+        ans.first= max(op1,max(op2,op3));
+        ans.second=max(left.second,right.second)+1;
         
         return ans;
+        
     }
     
 public:
@@ -32,13 +48,8 @@ public:
         if(root==NULL)
             return 0;
         
-        //call of left part
-        int left = diameterOfBinaryTree(root->left);
-        int right = diameterOfBinaryTree(root->right);
+        pair<int,int>ans= fastDia(root);
         
-        int both = height(root->left) + height(root->right);
-        
-        int ans= max(left ,max(right , both));
-        return ans;
+        return ans.first;
     }
 };
