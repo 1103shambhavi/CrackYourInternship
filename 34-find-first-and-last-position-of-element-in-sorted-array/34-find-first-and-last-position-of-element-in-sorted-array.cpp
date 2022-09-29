@@ -1,67 +1,66 @@
 class Solution {
     private:
-        void firstOcc(vector<int>nums, int target,vector<int>&ans)
+        int firstOcc(vector<int>nums, int target, int s,int e, int &a)
         {
-            int sol=-1;
-            int s=0;
-            int e=nums.size()-1;
             
-            int mid= s+(e-s)/2;
-            while(s<=e)
-            {
-                if(nums[mid]==target)
-                {
-                    sol=mid;
-                    e=mid-1;
-                }
-                
-                else if(nums[mid]>target)
-                    e=mid-1;
-                
-                else
-                    s=mid+1;
-                
-               mid= s+(e-s)/2;
+            //base case
+            if(s>e)
+                return a;
+            int mid = s+(e-s)/2;
+            
+            if(nums[mid]==target){
+                a=mid;
+                return firstOcc(nums,target,s,mid-1,a);
             }
             
-            ans.push_back(sol);
+            if(nums[mid]>target)
+                return firstOcc(nums,target,s,mid-1,a);
+            
+            else
+                return firstOcc(nums,target,mid+1,e,a);
+            
+        return a;
+            
         }
     
-    void lastOcc(vector<int>nums, int target,vector<int>&ans)
-    {
-        int sol=-1;
-            int s=0;
-            int e=nums.size()-1;
+   int lastOcc(vector<int>nums, int target, int s,int e,int &b)
+        {
+       
+            //base case
+            if(s>e)
+                return b;
+            int mid = s+(e-s)/2;
             
-            int mid= s+(e-s)/2;
-            while(s<=e)
-            {
-                if(nums[mid]==target)
-                {
-                    sol=mid;
-                    s=mid+1;
-                }
-                
-                else if(nums[mid]>target)
-                    e=mid-1;
-                
-                else
-                    s=mid+1;
-                
-              mid= s+(e-s)/2;
+       
+            if(nums[mid]==target){
+                b=mid;
+                return lastOcc(nums,target,mid+1,e,b);
             }
             
-            ans.push_back(sol);
-    }
+            if(nums[mid]>target)
+                return lastOcc(nums,target,s,mid-1,b);
+            
+            else
+                return lastOcc(nums,target,mid+1,e,b);
+       
+       return b;
+            
+        }
     
 public:
     vector<int> searchRange(vector<int>& nums, int target) 
     {
         vector<int>ans;
         
+        int s=0;
+        int e= nums.size()-1;
+        int a=-1;
+        int b=-1;
         //call for 1stocc
-        firstOcc(nums,target,ans);
-        lastOcc(nums,target,ans);
+        int l = firstOcc(nums,target,s,e,a);
+        int r = lastOcc(nums,target,s,e,b);
+        ans.push_back(l);
+        ans.push_back(r);
         
         return ans;
         
