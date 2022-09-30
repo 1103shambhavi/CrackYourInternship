@@ -11,29 +11,21 @@
  */
 class Solution {
 public:
-    int widthOfBinaryTree(TreeNode* root) 
-    {
-        if(root==NULL)
+    int widthOfBinaryTree(TreeNode* root) {
+        if (root==NULL)
             return 0;
-     
-        int max_width=INT_MIN;
-        //queue for level order traversal
-        queue<pair<TreeNode*,int>>q;
         
-        //insert root in q
+        int ans =0;
+        
+        queue<pair<TreeNode*,int>>q;
         q.push(make_pair(root,0));
         
-        //do the traversal while q!=empty()
+        //start level order traversal
         while(!q.empty())
         {
-            int size = q.size();
-            
-            //whatever node will be the 1st node at each level it would be the                  minindex  
-            //not initializing it inside for beause minindex is for a particular                level
-            
-            int minindex=q.front().second;
-            int first,last;
-            
+            int size=q.size();
+            int minindex,first,last;
+            minindex=q.front().second;
             for(int i=0;i<size;i++)
             {
                 pair<TreeNode* , int>temp=q.front();
@@ -58,11 +50,10 @@ public:
                     q.push(make_pair(curr->right, (long long)currindex*2 +2));
                 
             }
-            
-            max_width=max(max_width, (last-first +1));
+            ans= max(ans,last-first +1);
         }
         
-        return max_width;
+        return ans;
+        
     }
-    
 };
