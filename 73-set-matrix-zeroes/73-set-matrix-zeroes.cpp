@@ -1,48 +1,32 @@
 class Solution {
 public:
-    void setZeroes(vector<vector<int>>& M) 
+    void setZeroes(vector<vector<int>>& matrix) 
     {
-           
-        int i,j;
-        int rows=M.size();
-        int cols=M[0].size();
+        int row=matrix.size();
+        int col=matrix[0].size();
+        vector<int>drow(row,-1);
+        vector<int>dcol(col,-1);
         
-        int col0=1;
-        // setting the values of dummy array
-        for(int i=0;i<rows;i++)
+        for(int i=0;i<matrix.size();i++)
         {
-            //checking if 0th col of any row is 0 or not
-            if(M[i][0]==0)
-                col0=0;
-            
-            for(int j=1;j<cols;j++)
+            for(int j=0;j<matrix[0].size();j++)
             {
-                if(M[i][j]==0)
+                if(matrix[i][j]==0)
                 {
-                    M[0][j]=0;
-                    M[i][0]=0;
+                    drow[i]=0;
+                    dcol[j]=0;
                 }
             }
         }
         
-        // now traverse the array in reverse and set the whole array in 0 according to dummy array values;
-        
-        for(int i=rows-1;i>=0;i--)
+        for(int i=0;i<matrix.size();i++)
         {
-            for(int j= cols-1;j>=1;j--)
+            for(int j=0;j<matrix[0].size();j++)
             {
-                //for rows and col
-                if(M[i][0]==0 || M[0][j]==0)
-                    M[i][j]=0;
+                if(drow[i]==0 || dcol[j]==0)
+                    matrix[i][j]=0;
             }
-            //for col0; special case
-                if(col0==0)
-                {
-                    M[i][0]=0;
-                }
         }
         
-    
     }
-        
 };
