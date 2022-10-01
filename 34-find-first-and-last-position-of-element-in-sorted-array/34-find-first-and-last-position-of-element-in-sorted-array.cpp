@@ -1,4 +1,5 @@
 class Solution {
+    
     private:
         int firstOcc(vector<int>nums, int target, int s,int e, int &a)
         {
