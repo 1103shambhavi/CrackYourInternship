@@ -9,21 +9,23 @@ public:
         int e=(row*col)-1;
         
         int mid= s+(e-s)/2;
+        
         while(s<=e)
         {
-            if(matrix[mid/col][mid%col]==target)
+            int ele=matrix[mid/col][mid%col];
+            
+            if(ele==target)
                 return true;
             
-            else if(matrix[mid/col][mid%col] < target)
-            {   
-                s=mid+1;
-            }
-            else
-                e=mid -1;
+            if(ele>target)
+                e=mid-1;
             
-            mid= s+(e-s)/2;
-                
+            else
+                s=mid+1;
+            
+            mid=s+(e-s)/2;
         }
+        
         return false;
     }
 };
