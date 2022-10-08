@@ -44,44 +44,4 @@ public:
 
         return head;
     }
-        
-        
-      /*  ListNode* temp;
-        
-        //handle head case seperately
-        if(head!=NULL  && head->val==val)
-        {
-            temp=head->next;
-            delete head;
-            head=temp;
-        }
-        
-        //checking if the LL is empty
-        if(head==NULL)
-            return head;
-        
-        // handling rest of the LL
-        
-        ListNode* curr= head->next;
-        ListNode* prev= head;
-        
-        while(curr!=NULL)
-        {
-            if(curr->val==val)
-            {
-                prev->next=curr->next;
-                delete curr;
-                
-                curr=prev->next;
-            }
-            
-            else
-            {
-                prev=curr;
-                curr=curr->next;
-            }
-        }
-        return head;
-    }
-    */
-};
+};    
