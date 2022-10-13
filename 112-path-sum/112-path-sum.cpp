@@ -9,7 +9,8 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
+
+    class Solution {
     private:
        bool flag=false;
     void Sum(TreeNode *root,int &sum,int targetsum){
