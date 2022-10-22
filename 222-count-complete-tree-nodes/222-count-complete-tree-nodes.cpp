@@ -11,25 +11,50 @@
  */
 class Solution {
     private :
-    void inorder(TreeNode* root, int &count)
-    {
-        if(root==NULL)
-            return;
-        if(root->left)
-            inorder(root->left , count);
-        count++;
-        if(root->right)
-            inorder(root->right,count);
-    }
+   int findheightLeft(TreeNode* root)
+   {
+       if(root==NULL)
+           return 0;
+       
+       int ht=0;
+       while(root)
+       {
+           ht++;
+           root=root->left;
+       }
+       return ht;
+   }
     
+    int findheightRight(TreeNode* root)
+   {
+       if(root==NULL)
+           return 0;
+       
+       int ht=0;
+       while(root)
+       {
+           ht++;
+           root=root->right;
+       }
+        return ht;
+   }
 public:
     int countNodes(TreeNode* root) 
     {
+        if (root==NULL)
+            return 0;
         
-        int count=0;
-        if(root==NULL)
-            return count;
-        inorder(root,count);
-        return count;
+        //fing right height
+        int rh=findheightRight(root);
+        
+        //find left hright
+        int lh = findheightLeft(root);
+        
+        //if both are equal
+        if(rh==lh)
+            return (pow(2,rh)-1);
+        
+        return (1 + countNodes(root->left) + countNodes(root->right));
+        
     }
 };
