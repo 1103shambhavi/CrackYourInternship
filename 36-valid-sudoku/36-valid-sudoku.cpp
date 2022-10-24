@@ -1,70 +1,31 @@
 class Solution {
 public:
-    bool isValidSudoku(vector<vector<char>>& b) 
+    bool isValidSudoku(vector<vector<char>>& board) 
     {
-        unordered_set<int> s;
-        vector<int> v;
-        int count=0;
-        for(int i=0;i<9;i++)
+        unordered_set<string>st;
+        int i,j;
+        int n = board.size();
+        int m = board[0].size();
+        for(i=0;i<n;i++)
         {
-            s.clear();
-            v.clear();
-            for(int j=0;j<9;j++)
+            for(j=0;j<m;j++)
             {
-                if(b[i][j]!='.')
+                if(board[i][j] != '.')
                 {
-                    v.emplace_back(b[i][j]);
-                    s.insert(b[i][j]);
-                }
-            }
-            if(v.size()!=s.size()) return false;
-        }
-        
-        cout<<1;
-        
-        for(int i=0;i<9;i++)
-        {
-            s.clear();
-            v.clear();
-            for(int j=0;j<9;j++)
-            {
-                if(b[j][i]!='.')
-                {
-                    v.emplace_back(b[j][i]);
-                    s.insert(b[j][i]);
-                }
-            }
-            if(v.size()!=s.size()) return false;
-        }
-        
-        cout<<2;
-        for(int i=0;i<9;i++)
-        {
-            for(int j=0;j<9;j++)
-            {
-                if(b[i][j]!='.')
-                {
-                    count=0;
-                    int r=i/3; r*=3;
-                    int c=j/3; c*=3;
-                    for(int x=r;x<r+3;x++)
-                    {
-                        for(int y=c;y<c+3;y++)
-                        {
-                            if(b[i][j]==b[x][y]) count++;
-                        }
-                    }
-                    
-                    if(count!=1) return false;
+                   int num = board[i][j] - '0';
+                    string s1 = "row"+ to_string(i) + to_string(num);
+                    string s2 = "col"+ to_string(j) + to_string(num);
+                    string s3 = "box"+ to_string(i/3*3+j/3) + to_string(num);
+                  if(st.find(s1) != st.end() || st.find(s2) != st.end() ||                                      st.find(s3) != st.end() )
+                  {
+                      return false;
+                  }
+                    st.insert(s1);
+                    st.insert(s2);
+                    st.insert(s3);
                 }
             }
         }
-        
-        cout<<3;
-        
         return true;
-        
-        
-        
     }
 };
