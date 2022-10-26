@@ -12,36 +12,39 @@ class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) 
     {
-        // Checking if head is not the key
-        // If head is key then this is only tricky part of question
-        ListNode* temp;
+        //if head==NULL
+        if(head==NULL)
+            return head;
+        
+        ListNode* temp = head;
+      
         
         
-
-        // Deleter all occurance of Key if it is present as head
-        while(head != NULL && head->val == val){
-            temp = head ->next;
-            delete head;
-            head = temp;
-        }
+         //temp = head->next;
+        ListNode* prev = head;
         
-        // base condition
-        if(head == NULL) return head;
-        
-        ListNode* current = head->next;
-        ListNode* previous = head;
-
-        while(current != NULL){
-            if(current->val == val){
-                previous->next = current->next;
-                delete current;
-                current = previous->next;
-                continue;
+        while(temp!=NULL)
+        {
+             //if head is the key
+            if(head->val==val)
+            {
+                temp=head->next;
+                delete head;
+                head=temp;
             }
-            previous = current;
-            current = current->next;
+            
+            
+            else if(temp->val == val)
+            {
+                prev->next = temp->next;
+                temp = temp->next;
+            }
+            else
+            {
+                prev=temp;
+                temp=temp->next;
+            }
         }
-
         return head;
     }
-};    
+};
