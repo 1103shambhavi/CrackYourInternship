@@ -21,7 +21,7 @@ public:
         
         
          //temp = head->next;
-        ListNode* prev = head;
+        ListNode* prev = NULL;
         
         while(temp!=NULL)
         {
