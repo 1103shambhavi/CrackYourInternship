@@ -11,6 +11,7 @@
 class Solution {
     ListNode* merge(ListNode* list1, ListNode* list2)
     {
+        
         if(list1->next==NULL)
         { 
             list1->next=list2;
@@ -47,28 +48,20 @@ class Solution {
         }
         
         return list1;
-        
     }
     
     
-    
-    
 public:
-    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) 
-    {
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
         if(list1==NULL)
             return list2;
-        
         if(list2==NULL)
             return list1;
         
+        if(list1->val<= list2->val)
+            return merge(list1,list2);
         
-        ListNode*head;
-        if(list1->val < list2->val)
-            head= merge(list1, list2);
         else
-            head= merge(list2,list1);
-        
-        return head;
+            return merge(list2,list1);
     }
 };
