@@ -1,21 +1,27 @@
-class Solution {
+class Solution 
+{
 public:
-    bool isPalindrome(string s) {
-        int st=0;
-    int end=s.length()-1;
-    while(st<=end){
-        if(!isalnum(s[st]))
-        {st++; continue;} 
-        //isalnum to check whether its alphabet or number
-        if(!isalnum(s[end])){end--; continue;}
-        if(tolower(s[st])!=tolower(s[end])){ //tolower to cover it into lower case incase its case sensitive
- return 0;
-    }else{
-        st++;
-        end--;
-    }   
-      
-}
-       return 1;
+    bool isPalindrome(string s) 
+    {
+        int n = size(s);
+        // if string size 1 then simple return true if symbol is present no need worry about we don't need remove question ask return 
+        
+        if(n == 1) return true; 
+        // if string size 1 then simple return true if symbol is present no need worry about we don't need remove question ask return 
+        //true or false
+        
+        string str = "";
+        for(int i=0; i<n; i++) if(isalnum(s[i])) str +=s[i]; // only put number and char not any symbol
+        
+        // converting whole string into uppercase
+        transform(str.begin(), str.end(), str.begin(), ::tolower);
+        
+        int i=0,j=size(str)-1;
+        
+        while(i<j) {
+            if(str[i] != str[j]) return false; // checking where two char are not same then return false
+            i++,j--;
+        }
+        return true;
     }
 };
