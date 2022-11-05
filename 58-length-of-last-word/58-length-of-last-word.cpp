@@ -1,18 +1,30 @@
 class Solution {
 public:
-    int lengthOfLastWord(string s) {
-         int temp=0;
-    reverse(s.begin(),s.end());
-    for(int i=0;i<s.size();i++){
-        if(s[i]!=' '){
-            temp++;
-        }
-		else{
-            if(temp!=0){
+    int lengthOfLastWord(string s) 
+    {
+        int n= s.size();
+        reverse(s.begin(),s.end());
+        
+        int cnt=0;
+        int i=0;
+        
+        while(i<n)
+        {
+            if(s[i]!=' ')
                 break;
-            }
+            else
+                i++;
         }
-    }
-    return temp;
+        
+        //start point =i;
+        
+        while(i<n && s[i] != ' ')
+        {
+            cnt++;
+            i++;
+        }
+        
+        return cnt;
+        
     }
 };
