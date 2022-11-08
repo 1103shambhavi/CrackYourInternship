@@ -14,7 +14,7 @@ class Solution {
     
      TreeNode* solve(vector<int> &pre,int low,int high,int &index)
 {
- if(index>=pre.size())
+ if(index>pre.size()-1)
      return NULL;
   if(pre[index]<low || pre[index]>high)
       return NULL;
